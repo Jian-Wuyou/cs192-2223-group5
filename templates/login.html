@@ -5,6 +5,13 @@
 {% endblock %}
 
 {% block body %}
+
+<div class="google-signin">
+    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+        data-text="signin_with" data-shape="pill" data-logo_alignment="left">
+    </div>
+</div>
+
 <form name="registerForm" action="" method="POST">
     <div class="container">
       <h1>Register</h1>
@@ -38,7 +45,13 @@
       <button type="submit" class="signinbtn">Sign-in</button>
     </div>
 </form>
+
+<div id="g_id_onload" data-client_id="{{ google_client_id }}" data-login_uri="{{ domain }}/login"
+    data-prompt_parent_id="g_id_onload" data-auto_prompt="true" data-context="signin" data-ux_mode="popup"
+    data-auto_select="true">
+</div>
 {% endblock %}
 
 {% block scripts %}
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 {% endblock %}
