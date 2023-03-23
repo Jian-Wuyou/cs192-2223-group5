@@ -26,8 +26,6 @@ class Database:
     def delete_user(self, user_id: str):
         self.root.child(f"users/{user_id}").delete()
 
-    def lookup_user_by_username(self, email: str) -> Optional[Profile]:
-        users = self.root.child("users").get()
         if not users:
             return None
 
