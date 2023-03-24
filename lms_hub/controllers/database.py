@@ -3,16 +3,20 @@ from typing import Optional
 
 from firebase_admin.db import Reference
 from lms_hub.models.profile import Profile
-from lms_hub.models.credentials import LearningEnvCredentials
+from lms_hub.models.credentials import LearningEnvCredentials, UVLeCredentials
 
 
 def reconstruct_user_from_db(user_data: dict) -> Profile:
+    accounts = {}
+    if "uvle" in user_data.get("accounts", {}):
+        accounts["uvle"] = UVLeCredentials(**user_data["accounts"]["uvle"])
+
     return Profile(
         google_user_id=user_data["google_user_id"],
         user_id=user_data["user_id"],
         name=user_data["name"],
         email=user_data["email"],
-        accounts={}
+        accounts=accounts
     )
 
 class Database:

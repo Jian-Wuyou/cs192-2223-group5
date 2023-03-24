@@ -9,7 +9,6 @@ class Profile:
     email: str
     accounts: dict[str, LearningEnvCredentials]
     user_id: str = ""
-    username: str = ""
 
     def __post_init__(self):
         self.is_authenticated = True
