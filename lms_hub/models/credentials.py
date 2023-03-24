@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 
 @dataclass
@@ -26,7 +26,7 @@ class GoogleCredentials(LearningEnvCredentials):
     client_id: str = ""
 
     # OAuth2 scopes
-    scopes: List[str] = field(default_factory=list)
+    scopes: list[str] = field(default_factory=list)
 
     # OpenID token
     id_token: str = ""

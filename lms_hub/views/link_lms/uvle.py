@@ -11,7 +11,7 @@ UVLe = Blueprint("link-uvle", __name__)
 @UVLe.route("/link/uvle", methods=["GET"])
 @login_required
 def login_page():
-    return render_template("login-uvle.html")
+    return render_template("lms/login-uvle.html")
 
 @UVLe.route("/link/uvle", methods=["POST"])
 @login_required
