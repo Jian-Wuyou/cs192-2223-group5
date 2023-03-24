@@ -3,6 +3,7 @@ from typing import Optional
 
 from firebase_admin.db import Reference
 from lms_hub.models.profile import Profile
+from lms_hub.models.credentials import LearningEnvCredentials
 
 
 def reconstruct_user_from_db(user_data: dict) -> Profile:
@@ -25,14 +26,20 @@ class Database:
 
     def delete_user(self, user_id: str):
         self.root.child(f"users/{user_id}").delete()
+    
+    def update_user_lms_creds(self, lms_name: str, user_id: str, creds: LearningEnvCredentials):
+        user = self.lookup_user_by_id(user_id)
+        if not user:
+            raise ValueError(f"User {user_id} does not exist")
 
-        if not users:
-            return None
+        self.root.child(f"users/{user_id}/accounts/{lms_name}").set(asdict(creds))
 
-        for _, user in users.items():
-            if user["email"] == email:
-                return reconstruct_user_from_db(user)
-        return None
+    def delete_user_lms_creds(self, lms_name: str, user_id: str):
+        user = self.lookup_user_by_id(user_id)
+        if not user:
+            raise ValueError(f"User {user_id} does not exist")
+
+        self.root.child(f"users/{user_id}/accounts/{lms_name}").delete()
 
     def lookup_user_by_email(self, email: str) -> Optional[Profile]:
         users = self.root.child("users").get()
