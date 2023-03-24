@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "base-logged-in.html" %}
 
 {% block title %}
 &#8212; Home
 {% endblock %}
 
-{% block body %}
-<h1>Good day,{{ current_user['name'] }}</h1>
+{% block content %}
+<h1>Good day, {{ current_user['name'] }}</h1>
 <br>
 <a href="{{ url_for('logout.logout_page') }}">Logout</a>
 {% endblock %}
