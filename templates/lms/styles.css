@@ -1,0 +1,236 @@
+:root {
+  --main-bg-color: #063149;
+  --main-text-color: #063149;
+  --second-text-color: #bbbec5;
+  --second-bg-color: #0d6594;
+}
+
+.primary-text {
+  color: var(--main-text-color);
+}
+
+.second-text {
+  color: var(--second-text-color);
+}
+
+.primary-bg {
+  background-color: var(--main-bg-color);
+}
+
+.secondary-bg {
+  background-color: var(--second-bg-color);
+}
+
+.rounded-full {
+  border-radius: 100%;
+}
+
+h2,
+.fa-align-left,
+.fa-user {
+  color: #ffffff;
+}
+
+#wrapper {
+  overflow-x: hidden;
+  background-image: linear-gradient(
+    to right,
+    #063149,
+    #0a557e,
+    #2575a0,
+    #37657e,
+    #3d6880
+  );
+}
+
+.profile-image {
+  background-image: url(https://m.media-amazon.com/images/M/MV5BOTg4N2Y3ZDEtN2I5MS00YjcyLThkZjUtZDMzZGFlYmNlZjc1XkEyXkFqcGdeQXVyNDUxNjc5NjY@._V1_.jpg);
+
+  background-size: cover;
+  background-position: center;
+
+  height: 50px;
+  width: 50px;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+#menu-toggle {
+  cursor: pointer;
+}
+
+.list-group-item {
+  border: none;
+  padding: 20px 30px;
+}
+
+.list-group-item.active {
+  background-color: transparent;
+  color: var(--main-text-color);
+  font-weight: bold;
+  border: none;
+}
+
+.name-user {
+  color: #3d6880;
+}
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+
+
+
+
+/* Nice calendar */
+
+html body {
+  background: #3075dc;
+}
+
+html body  {
+  color:#000000
+}
+
+html body .page-hero h3 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: -1px -1px 1px #002446, 2px 2px 1px #49adff;
+  text-transform: uppercase;
+  color: #1287bd;
+}
+
+html body .page-hero p {
+  color: #acf1f1;
+}
+
+html body .card {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+html body .card-header {
+  background: #000000;
+  color: #fff;
+}
+
+html body .card-header .prevMonth {
+  cursor: pointer;
+}
+
+html body .card-header .nextMonth {
+  cursor: pointer;
+}
+
+html body .card-body {
+  background: #477ed1;
+}
+
+html body .card-body .days span {
+  background: #275ab9;
+  color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  height: 45px;
+  width: 45px;
+  line-height: 45px;
+  cursor: pointer;
+}
+
+html body .card-body .days span:hover {
+  background: #1b45a1;
+}
+html body .card-body .dates span {
+  background: #6ca8ec;
+  color: #000;
+  border-radius: 50%;
+  display: inline-block;
+  height: 45px;
+  width: 45px;
+  line-height: 45px;
+  cursor: pointer;
+}
+html body .card-body .dates span.active,
+html body .card-body .dates span:hover {
+  background: #6194cf;
+  color: #000;
+}
+html body .card-body .dates span.ntMonth {
+  color: #938e8e;
+  background: #d8eaff;
+}
+html body .card-body .dates span.ntMonth:hover {
+  background: #eefaff;
+  color: #000;
+}
+html body .card#event .card-header .close {
+  color: #000000;
+  opacity: 1;
+}
+html body .card#event .card-body .events-today {
+  height: 210px;
+  overflow-x: hidden;
+}
+html body .card#event .card-body .events-input .data-invalid {
+  border-color: rgb(0, 140, 255);
+}
+html body .card#event .card-body .events-input .error {
+  font-size: 12px;
+  color: rgb(0, 132, 255);
+  position: absolute;
+  top: 100%;
+}
+@media (max-width: 767px) {
+  html body .pa-sm {
+    position: absolute;
+  }
+  html body .card-body .days span {
+    height: 38px;
+    width: 38px;
+    line-height: 38px;
+    font-size: 0.8rem;
+  }
+  html body .card-body .dates span {
+    height: 38px;
+    width: 38px;
+    line-height: 38px;
+    font-size: 0.8rem;
+  }
+  html body .card#event .card-body .events-today {
+    height: 188px;
+  }
+} /*# sourceMappingURL=style.css.map */
