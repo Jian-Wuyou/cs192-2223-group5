@@ -53,6 +53,35 @@ h2,
   width: 50px;
 }
 
+.uvle-image{
+  background-image: url(https://uvle.upd.edu.ph/pluginfile.php/1/core_admin/logocompact/300x300/1677722115/logo-uvle-min-1024x1024.png);
+
+  background-size: cover;
+  background-position: center;
+
+  height: 50px;
+  width: 50px;
+}
+
+.gmail-image{
+  background-image: url(https://cdn-icons-png.flaticon.com/512/2702/2702602.png);
+
+  background-size: cover;
+  background-position: center;
+
+  height: 50px;
+  width: 50px;
+}
+
+.googleclassroom-image{
+  background-image: url(https://logos-world.net/wp-content/uploads/2021/08/Google-Classroom-Logo-2014-2016.png);
+
+  background-size: cover;
+  background-position: center;
+
+  height: 50px;
+  width: 50px;
+}
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;
@@ -111,6 +140,13 @@ h2,
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
   }
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 3px solid rgb(47, 142, 206);
 }
 
 
@@ -234,123 +270,3 @@ html body .card#event .card-body .events-input .error {
     height: 188px;
   }
 } /*# sourceMappingURL=style.css.map */
-
-:root {
-    --main-bg-color: #063149;
-    --main-text-color: #063149;
-    --second-text-color: #bbbec5;
-    --second-bg-color: #0d6594;
-  }
-  
-  .primary-text {
-    color: var(--main-text-color);
-  }
-  
-  .second-text {
-    color: var(--second-text-color);
-  }
-  
-  .primary-bg {
-    background-color: var(--main-bg-color);
-  }
-  
-  .secondary-bg {
-    background-color: var(--second-bg-color);
-  }
-  
-  .rounded-full {
-    border-radius: 100%;
-  }
-  
- h2, .fa-align-left, .fa-user{
-    color: #ffffff;
-  }
-
-
-
-
-  #wrapper {
-    overflow-x: hidden;
-    background-image: linear-gradient(
-      to right,
-      #063149,
-      #0a557e,
-      #2575a0,
-      #37657e,
-      #3d6880
-    );
-  }
-
-  .profile-image {
-
-    background-image: url(https://m.media-amazon.com/images/M/MV5BOTg4N2Y3ZDEtN2I5MS00YjcyLThkZjUtZDMzZGFlYmNlZjc1XkEyXkFqcGdeQXVyNDUxNjc5NjY@._V1_.jpg);
-    
-    background-size:cover;
-    background-position: center;
-    
-
-    height: 50px;
-    width: 50px;
-  }
-  
-  #sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -15rem;
-    -webkit-transition: margin 0.25s ease-out;
-    -moz-transition: margin 0.25s ease-out;
-    -o-transition: margin 0.25s ease-out;
-    transition: margin 0.25s ease-out;
-  }
-  
-  #sidebar-wrapper .sidebar-heading {
-    padding: 0.875rem 1.25rem;
-    font-size: 1.2rem;
-  }
-  
-  #sidebar-wrapper .list-group {
-    width: 15rem;
-  }
-  
-  #page-content-wrapper {
-    min-width: 100vw;
-  }
-  
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: 0;
-  }
-  
-  #menu-toggle {
-    cursor: pointer;
-  }
-  
-  .list-group-item {
-    border: none;
-    padding: 20px 30px;
-  }
-  
-  .list-group-item.active {
-    background-color: transparent;
-    color: var(--main-text-color);
-    font-weight: bold;
-    border: none;
-  }
-  
-  .name-user{
-    color: #3d6880;
-  }
-  @media (min-width: 768px) {
-    #sidebar-wrapper {
-      margin-left: 0;
-    }
-  
-    #page-content-wrapper {
-      min-width: 0;
-      width: 100%;
-    }
-  
-    #wrapper.toggled #sidebar-wrapper {
-      margin-left: -15rem;
-    }
-    
-  }
-
