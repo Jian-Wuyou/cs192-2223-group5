@@ -67,7 +67,7 @@
                     <div class="col-md-3">
                         <div class="p-2 bg-white shadow-sm d-flex align-items-center rounded border border-dark border-3">
                             <i class="fas fa-briefcase fs-4 primary-text"></i>
-                            <p class="fs-2 m-2 text-danger">6 Assignments due!</p>
+                            <p id ="assignmentNumber" class="fs-2 m-2 text-danger">6 Assignments due!</p>
                         </div>
                     </div>
                 </div>
@@ -76,19 +76,8 @@
             <div class="container-fluid px-4">
                 <div class="row g-3 my-2">
                     <h2 class="fs-3">Upcoming events</h2>
-                    <div class="col-md-3 d-grid gap-4">
-                        <div class="p-2 bg-white shadow-sm d-flex align-items-center rounded border border-dark border-3">
-                            <p class="fs-2 m-2">CS 192</p>
-                            <i class="fas fa-briefcase fs-1 primary-text m-2"></i>
-                        </div>
-                        <div class="p-2 bg-white shadow-sm d-flex align-items-center rounded border border-dark border-3">
-                            <p class="fs-2 m-2">CS 145</p>
-                            <i class="fas fa-briefcase fs-1 primary-text m-2"></i>
-                        </div>
-                        <div class="p-2 bg-white shadow-sm d-flex align-items-center rounded border border-dark border-3">
-                            <p class="fs-2 m-2">CS 153</p>
-                            <i class="fas fa-briefcase fs-1 primary-text m-2"></i>
-                        </div>
+                    <div id="deadlines" class="col-md-3 d-grid gap-4">
+    
                     </div>
                 </div>
             </div>
@@ -132,5 +121,6 @@
             el.classList.toggle("toggled");
         };
     </script>
+    <script src="dashboard.js" type="text/javascript"></script>
 </body>
 </html>
