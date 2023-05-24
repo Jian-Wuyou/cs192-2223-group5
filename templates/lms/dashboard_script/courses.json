@@ -1,0 +1,22 @@
+{
+"courses": [
+  {
+    "courseid": "1",
+    "name": "CS 192",
+    "url": "google.com",
+    "description": "To be submitted on Monday"
+  },
+  {
+    "courseid": "2",
+    "name": "CS 180",
+    "url": "google.com",
+    "description": "To be submitted on Monday"
+  },
+  {
+    "courseid": "3",
+    "name": "CS 145",
+    "url": "google.com",
+    "description": "To be submitted on Monday"
+  }
+]
+}

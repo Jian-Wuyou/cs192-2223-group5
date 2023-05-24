@@ -1,0 +1,52 @@
+{
+"deadlines": [
+  {
+    "course_name": "CS 192",
+    "course_url": "google.com",
+    "name": "Proj 1",
+    "date": "2023-05-27",
+    "description": "to be submitted on blah",
+    "platform": "uvle"
+  },
+  {
+    "course_name": "CS 180",
+    "course_url": "google.com",
+    "name": "Proj 2",
+    "date": "2023-05-28",
+    "description": "to be submitted on blah",
+    "platform": "uvle"
+  },
+  {
+    "course_name": "CS 145",
+    "course_url": "google.com",
+    "name": "Proj 3",
+    "date": "2023-05-29",
+    "description": "to be submitted on blah",
+    "platform": "uvle"
+  },
+  {
+    "course_name": "STS 1",
+    "course_url": "google.com",
+    "name": "Science",
+    "date": "2023-05-28",
+    "description": "to be submitted on blah",
+    "platform": "uvle"
+  },
+  {
+    "course_name": "Fil 40",
+    "course_url": "google.com",
+    "name": "Paper",
+    "date": "2023-05-28",
+    "description": "to be submitted on blah",
+    "platform": "uvle"
+  },
+  {
+    "course_name": "Fil 40",
+    "course_url": "google.com",
+    "name": "Paper 2",
+    "date": "2023-05-28",
+    "description": "to be submitted on blah",
+    "platform": "uvle"
+  }
+]
+}
