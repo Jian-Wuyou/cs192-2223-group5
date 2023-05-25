@@ -28,9 +28,17 @@ function numberOfAssignments(n){
     box.textContent = n + " Assignments Due!"
 }
 
+function ownerGreeting(n){
+    const box = document.getElementById('owner');
+    var greetingsArray = ["Welcome back, ", "Let's get you back from where you left off, ", "Good day, ", "Back to work, "]
+    var greeting = greetingsArray[Math.floor(Math.random()*greetingsArray.length)]
+    box.textContent = greeting + n + "!"
+}
+
 fetch('dashboard_script/deadlines.json')
     .then(response => response.json())
     .then((json) => {
+        ownerGreeting("John")
         numberOfAssignments(json.deadlines.length)
         for (var i = 0; i < json.deadlines.length; i++){
             console.log(json.deadlines[i])
