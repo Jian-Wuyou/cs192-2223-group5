@@ -149,8 +149,35 @@ hr {
   border-top: 3px solid rgb(47, 142, 206);
 }
 
+.scroll {
+  max-height: 100px;
+  overflow-y: auto;
+}
 
+.classcard:hover {
+  transform:scale(1.15);
+}
+.classcard{
+  transition: all 0.25s;
+  border-color: #000;
+  border-width: 50px;
+}
 
+.classcard-header {
+ color: #1287bd;
+}
+
+html body .classcard-header {
+  background: #0c3768;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.redtext {
+  font-weight: bold;
+  font-size: 3rem;
+}
 
 /* Nice calendar */
 

@@ -2,15 +2,15 @@
 "deadlines": [
   {
     "course_name": "CS 192",
-    "course_url": "google.com",
+    "course_url": "http://www.google.com",
     "name": "Proj 1",
     "date": "2023-05-27",
-    "description": "to be submitted on blah",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "platform": "uvle"
   },
   {
     "course_name": "CS 180",
-    "course_url": "google.com",
+    "course_url": "http://www.google.com",
     "name": "Proj 2",
     "date": "2023-05-28",
     "description": "to be submitted on blah",
@@ -44,6 +44,14 @@
     "course_name": "Fil 40",
     "course_url": "google.com",
     "name": "Paper 2",
+    "date": "2023-05-28",
+    "description": "to be submitted on blah",
+    "platform": "uvle"
+  },
+  {
+    "course_name": "Fil 40",
+    "course_url": "google.com",
+    "name": "Paper 3",
     "date": "2023-05-28",
     "description": "to be submitted on blah",
     "platform": "uvle"
