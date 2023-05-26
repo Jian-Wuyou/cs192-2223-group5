@@ -40,15 +40,21 @@ TODO: Returns the deadlines in `:lms`. Allows you to filter by date, inclusive.
 ### JSON body parameters
 | Name | Type | Description |
 |---|---|---|
-| `from`(optional) | int or string | If int, use epoch time; otherwise, use `YYYY/MM/DD` format. |
-| `to`(optional) | int or string | If int, use epoch time; otherwise, use `YYYY/MM/DD` format. |
+| `from`(optional) | int, string, or null | Defaults to null (includes everything). If int, use epoch time; otherwise, use `YYYY/MM/DD` format. |
+| `to`(optional) | int, string, or null | Defaults to null (includes everything). If int, use epoch time; otherwise, use `YYYY/MM/DD` format. |
+
 
 ### Response Fields
 | Name | Type | Description |
 |---|---|---|
-| `deadlines` | dict  | Array of deadlines |
+| `deadlines` | array | Array of deadlines |
+| `deadlines[n].course_name` | string | The course's name which should be the same as in `GET /api/:lms/classes` |
+| `deadlines[n].course_url` | string | The course's URL which should be the same as in `GET /api/:lms/classes` |
 | `deadlines[n].name` | string | Name/title of the assigment |
 | `deadlines[n].url` | string | URL redirecting to the assignment description. |
 | `deadlines[n].timestamp` | int | Epoch time of the deadline, zero if none is specified. |
-| `deadlines[n].date` | string or null | If a string, format is `YYYY/MM/DD`; otherwise, the requirement has no deadline specified. This makes filtering and sorting the calendar by date easier. |
+| `deadlines[n].date` | string | `0` if no deadline specified; otherwise, format is `YYYY-MM-DD`. This makes filtering and sorting the calendar by date easier. |
+| `deadlines[n].description` | string | The description of the assignment |
+| `deadlines[n].moduletype`<br>(planned) | string | Currently only determined `assign`, `forum`, and possibly one for journal-type submissions in UVLe. TODO: determine the values for google |
+| `deadlines[n].platform` | string | Either `uvle` or `gclass`. |
 
