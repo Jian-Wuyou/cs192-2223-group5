@@ -66,12 +66,8 @@
                 <div class="row g-3 my-2">
                     <div class="col-md-3">
                         <div class="p-1 d-flex align-items-center">
-                            <p class="fs-2 m-2 text-light">Account</p>
-                            <i class="fas m-2 fa-external-link-alt fs-4 primary-text"></i>                            
-                        </div>
-                        <div class="p-1 d-flex align-items-center">
-                            <p class="fs-2 m-2 text-light">Personalization</p>
-                            <i class="fas m-2 fa-external-link-alt fs-4 primary-text"></i>                            
+                            <p class="fs-2 m-2 text-light">Link Account</p>
+                            <button class = "btn btn-link" onClick="location.href='login2uvle.html'"><i class="fas m-2 fa-external-link-alt fs-4 primary-text"></i></button>
                         </div>
                         <hr>
                     </div>
@@ -86,6 +82,7 @@
                         <div class="p-1 d-flex align-items-center">
                             <div class="rounded-circle gmail-image m-0">&nbsp;</div>  
                             <p class="fs-3 m-2 text-light">juandelacruz@gmail.com</p>
+                            <a href="{{ url_for('link-uvle.logout_post') }}">Unlink</a>
                         </div>
 
                         <div class="p-1 d-flex align-items-center">
