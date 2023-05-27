@@ -2,11 +2,11 @@ import requests
 
 from lms_hub.controllers.learning_env import LearningEnv
 from lms_hub.models.deadline import Deadline
-from lms_hub.models.credentials import MoodleCredentials
+from lms_hub.models.credentials import UVLeCredentials
 from lms_hub.models.learning_env_class import LearningEnvClass, Platform
 
 class UVLeClient(LearningEnv):
-    def __init__(self, creds: MoodleCredentials):
+    def __init__(self, creds: UVLeCredentials):
         self.credentials = creds
         self._user_id = None
     
