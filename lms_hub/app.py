@@ -3,7 +3,7 @@ from os import environ, path
 
 import firebase_admin
 from dotenv import load_dotenv
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, Response, request
 from flask_login import LoginManager
 
 from lms_hub.controllers.database import Database
@@ -43,8 +43,23 @@ def user_loader(user_id: str) -> Profile:
 def unauthorized_handler():
     return redirect(url_for("login.login_page") + "?next=" + request.path)
 
+@app.after_request
+def add_cors(resp: Response):
+    # Allow all domains for now
+    resp.headers.update({
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, DELETE",
+        "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, X-Requested-With"
+    })
+    return resp
+
 init_views(app)
+
+@app.route("/")
+def index():
+    return redirect(url_for("dashboard.dashboard_page"))
 
 # Run app
 if __name__ == "__main__":
-    app.run(debug=True)
+    environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+    app.run("localhost", 29001, debug=True)
