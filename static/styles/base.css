@@ -53,7 +53,7 @@ h2,
   width: 50px;
 }
 
-.uvle-image{
+.uvle-image {
   background-image: url(https://uvle.upd.edu.ph/pluginfile.php/1/core_admin/logocompact/300x300/1677722115/logo-uvle-min-1024x1024.png);
 
   background-size: cover;
@@ -63,7 +63,7 @@ h2,
   width: 50px;
 }
 
-.gmail-image{
+.gmail-image {
   background-image: url(https://cdn-icons-png.flaticon.com/512/2702/2702602.png);
 
   background-size: cover;
@@ -73,7 +73,7 @@ h2,
   width: 50px;
 }
 
-.googleclassroom-image{
+.googleclassroom-image {
   background-image: url(https://logos-world.net/wp-content/uploads/2021/08/Google-Classroom-Logo-2014-2016.png);
 
   background-size: cover;
@@ -82,7 +82,6 @@ h2,
   height: 50px;
   width: 50px;
 }
-
 
 #sidebar-wrapper {
   min-height: 100vh;
@@ -157,16 +156,16 @@ hr {
 }
 
 .classcard:hover {
-  transform:scale(1.15);
+  transform: scale(1.15);
 }
-.classcard{
+.classcard {
   transition: all 0.25s;
   border-color: #000;
   border-width: 50px;
 }
 
 .classcard-header {
- color: #1287bd;
+  color: #1287bd;
 }
 
 button.btn.add::before {
@@ -206,8 +205,8 @@ html body {
   background: #3075dc;
 }
 
-html body  {
-  color:#000000
+html body {
+  color: #000000;
 }
 
 html body .page-hero h3 {
