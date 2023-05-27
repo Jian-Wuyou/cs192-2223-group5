@@ -4,7 +4,7 @@ from os import environ, path
 import firebase_admin
 from dotenv import load_dotenv
 from flask import Flask, redirect, url_for, Response, request
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 
 from lms_hub.controllers.database import Database
 from lms_hub.models.profile import Profile
@@ -55,9 +55,12 @@ def add_cors(resp: Response):
 
 init_views(app)
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
-    return redirect(url_for("dashboard.dashboard_page"))
+    # Redirect to dashboard if already logged in
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard.dashboard_page"))
+    return redirect(url_for("login.login_page"))
 
 # Run app
 if __name__ == "__main__":

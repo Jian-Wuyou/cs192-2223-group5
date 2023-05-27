@@ -24,8 +24,7 @@ def login_page():
         return redirect(url_for("dashboard.dashboard_page"))
 
     return render_template(
-        "login.html",
-        full_width="true",
+        "lms/login.html",
         domain=environ["DOMAIN"],
         google_client_id=current_app.config["GOOGLE_CLIENT_ID"],
     )
