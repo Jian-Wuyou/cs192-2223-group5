@@ -1,0 +1,73 @@
+{% extends "lms/base.html" %}
+
+{% block body %}
+<div class="d-flex" id="wrapper">
+    <!-- Side bar -->
+
+    <div class="bg-white" id="sidebar-wrapper">
+        <div
+            class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase">
+            LMS Backpack
+        </div>
+
+        <div class="list-group list-group-flush my-3">
+            <a
+                href="{{ url_for('dashboard.dashboard_page') }}"
+                class="{% if active_nav == 'dashboard' %}active{% endif %} list-group-item list-group-item-action bg-transparent second-text fw-bold button">
+                <h4>Dashboard</h4>
+            </a>
+            <a
+                href="{{ url_for('calendar.calendar_page') }}"
+                class="{% if active_nav == 'calendar' %}active{% endif %} list-group-item list-group-item-action bg-transparent second-text fw-bold button">
+                <h4>Calendar</h4>
+            </a>
+            <a
+                href="{{ url_for('classcard.classcard_page') }}"
+                class="{% if active_nav == 'classcard' %}active{% endif %} list-group-item list-group-item-action bg-transparent second-text fw-bold button">
+                <h4>Class Cards</h4>
+            </a>
+            <a
+                href="{{ url_for('settings.settings_page') }}"
+                class="{% if active_nav == 'settings' %}active{% endif %} list-group-item list-group-item-action bg-transparent second-text fw-bold button">
+                <h4>Settings</h4>
+            </a>
+        </div>
+    </div>
+    <!-- End Side bar -->
+
+    <div id="page-content-wrapper">
+        <!-- Start Navbar -->
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i
+                    class="fas fa-align-left primary-text fs-4 me-3"
+                    id="menu-toggle"></i>
+                <h2 class="fs-2 m-0">{% block page_heading %}{% endblock %}</h2>
+            </div>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <h2 class="fs-4 m-2">Juan Dela Cruz</h2>
+                <div class="rounded-circle profile-image m-0">
+                    &nbsp;
+                </div>
+            </ul>
+        </nav>
+        <!-- End Navbar -->
+
+        {% block content %} {% endblock %}
+    </div>
+    <!--End content-->
+</div>
+{% endblock %}
