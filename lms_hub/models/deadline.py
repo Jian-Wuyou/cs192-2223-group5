@@ -2,6 +2,8 @@ from datetime import datetime
 from dataclasses import asdict, dataclass
 from json import JSONEncoder
 
+from .learning_env_class import Platform
+
 @dataclass
 class Deadline:
     """
@@ -13,7 +15,7 @@ class Deadline:
     url: str                    # URL to the assignment, if any
     timestamp: int              # Deadline date, in Unix timestamp format
     description: str
-    platform: str               # Platform that the course is on
+    platform: Platform          # Platform that the course is on
     moduletype: str = None
 
 

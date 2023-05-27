@@ -2,8 +2,10 @@ from dataclasses import asdict
 from typing import Optional
 
 from firebase_admin.db import Reference
-from lms_hub.models.profile import Profile
+
 from lms_hub.models.credentials import LearningEnvCredentials, UVLeCredentials
+from lms_hub.models.learning_env_class import Platform
+from lms_hub.models.profile import Profile
 
 
 def reconstruct_user_from_db(user_data: dict) -> Profile:
@@ -31,14 +33,14 @@ class Database:
     def delete_user(self, user_id: str):
         self.root.child(f"users/{user_id}").delete()
     
-    def update_user_lms_creds(self, lms_name: str, user_id: str, creds: LearningEnvCredentials):
+    def update_user_lms_creds(self, lms_name: Platform, user_id: str, creds: LearningEnvCredentials):
         user = self.lookup_user_by_id(user_id)
         if not user:
             raise ValueError(f"User {user_id} does not exist")
 
         self.root.child(f"users/{user_id}/accounts/{lms_name}").set(asdict(creds))
 
-    def delete_user_lms_creds(self, lms_name: str, user_id: str):
+    def delete_user_lms_creds(self, lms_name: Platform, user_id: str):
         user = self.lookup_user_by_id(user_id)
         if not user:
             raise ValueError(f"User {user_id} does not exist")
