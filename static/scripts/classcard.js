@@ -40,9 +40,9 @@ function addCard(assignment){
 
 function ownerGreeting(n){
     const box = document.getElementById('owner');
-    var greetingsArray = ["Here are your classes, "];
+    var greetingsArray = ["Here are your classes,"];
     var greeting = greetingsArray[Math.floor(Math.random()*greetingsArray.length)];
-    box.textContent = greeting + n + "!";
+    box.textContent = greeting;
 }
 
 fetch('classcard_script/courses.json')
