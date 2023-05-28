@@ -68,4 +68,4 @@ app.register_blueprint(temp)
 # Run app
 if __name__ == "__main__":
     environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-    app.run("localhost", 29001, debug=True)    app.run("0.0.0.0", 5000, debug=True)
+    app.run("localhost", 29001, debug=True)
