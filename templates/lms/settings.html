@@ -25,25 +25,12 @@
         <h2 class="fs-3">Linked accounts</h2>
         <div class="col-md-3 d-grid gap-4">
             <div class="p-1 d-flex align-items-center">
-                <div class="rounded-circle gmail-image m-0">&nbsp;</div>
+                <div class="rounded-circle gmail-image m-0">&nbsp;</div>     
                 <p class="fs-3 m-2 text-light">
-                    juandelacruz@gmail.com
+                    {{ current_user['email'] }}
                 </p>
-                <a href="{{ url_for('link-uvle.logout_post') }}"
-                    >Unlink</a
-                >
-            </div>
-
-            <div class="p-1 d-flex align-items-center">
-                <div class="rounded-circle uvle-image m-0">&nbsp;</div>
-                <p class="fs-3 m-2 text-light">jdelacruz</p>
-            </div>
-
-            <div class="p-1 d-flex align-items-center">
-                <div class="rounded-circle googleclassroom-image m-0">
-                    &nbsp;
-                </div>
-                <p class="fs-3 m-2 text-light">jdelacruz@up.edu.ph</p>
+                <a class = "m-2" href="{{ url_for('link-uvle.logout_post') }}"
+                    >Unlink</a>
             </div>
             <hr/>
         </div>
