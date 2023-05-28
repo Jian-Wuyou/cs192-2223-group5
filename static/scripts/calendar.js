@@ -9,6 +9,12 @@ let day = c_date.getDay();
 let month = c_date.getMonth();
 let year = c_date.getFullYear();
 
+//{{ current_user['name'] }};
+//let x = () =>{{ deadlines[1] }};
+//let x = fetch(deadlines)
+
+//let x = fetch("http://localhost:29001/link/gclass", {method: 'POST', })
+
 (function App() {
 
     const calendar = `<div class="container">
@@ -65,13 +71,8 @@ let year = c_date.getFullYear();
                                 <div class="input-group-append">
                                     <button class="btn btn-dark" type="button" id="createEvent">+</button>
                                 </div>
-                            </div>                        
-                        </div>
-                    </div>                            
-                </div>
-            </div>
-        </div>
-        <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+                            </div>   
+                            <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 100px;">
             <div class="toast" style="position: absolute; top: 0; right: 15px;" data-delay="3000">
                 <div class="toast-header">
                 <strong class="mr-auto">Calendar</strong>
@@ -84,9 +85,16 @@ let year = c_date.getFullYear();
                     
                 </div>
             </div>
-        </div>`;
+        </div>                     
+                        </div>
+                    </div>                            
+                </div>
+            </div>
+        </div>
+        `;
     document.getElementById('app').innerHTML = calendar;   
 })()
+
 
 function renderCalendar(m, y) {
     //Month's first weekday
@@ -213,6 +221,7 @@ fetch('calendar_script/calendar_sample_data2.json')
     console.log("Error:", error);
   });
 
+let deadlines_data = fetch("http://localhost:29001/api/uvle/deadlines", {method:"POST", body:{"from":"2023/05/28"}});
 
 //let data = {
 //  "professor": "Solamo",
