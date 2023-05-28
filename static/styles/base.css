@@ -43,15 +43,6 @@ h2,
   );
 }
 
-.profile-image {
-  background-image: url(https://m.media-amazon.com/images/M/MV5BOTg4N2Y3ZDEtN2I5MS00YjcyLThkZjUtZDMzZGFlYmNlZjc1XkEyXkFqcGdeQXVyNDUxNjc5NjY@._V1_.jpg);
-
-  background-size: cover;
-  background-position: center;
-
-  height: 50px;
-  width: 50px;
-}
 
 .uvle-image {
   background-image: url(https://uvle.upd.edu.ph/pluginfile.php/1/core_admin/logocompact/300x300/1677722115/logo-uvle-min-1024x1024.png);
