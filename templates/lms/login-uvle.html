@@ -1,23 +1,76 @@
-{% extends "base-logged-in.html" %}
+{% extends "lms/base.html" %}
+{% block title %}Link UVLe{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+<section class="vh-100" style="background-color: #063149">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 2rem">
+                    <div class="row g-0">
+                        <div
+                            class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div
+                                class="card-body p-4 p-lg-5 text-black bg-white">
+                                <form name="signinForm">
+                                    <div
+                                        class="d-flex align-items-center mb-3 pb-1">
+                                        <span class="h1 fw-bold mb-0"
+                                            >Connect your UVLê account</span
+                                        >
+                                    </div>
 
-{% block content %}
-<form name="signinForm">
-    <div class="container">
-      <h1>Sign-in</h1>
-      <hr>
-  
-      <label for="username"><b>Email</b></label>
-      <input type="text" placeholder="Enter Username" id="username" required>
-  
-      <label for="password"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" id="password" required>
-  
-      <button type="submit">Sign-in</button>
+                                    <div class="form-outline mb-4">
+                                        <input
+                                            type="text"
+                                            id="username"
+                                            class="form-control form-control-lg"
+                                            placeholder="Enter Username"
+                                            required />
+                                        <label class="form-label" for="username"
+                                            >Email</label
+                                        >
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input
+                                            type="password"
+                                            id="password"
+                                            class="form-control form-control-lg"
+                                            placeholder="Enter Password"
+                                            required />
+                                        <label class="form-label" for="password"
+                                            >Password</label
+                                        >
+                                    </div>
+
+                                    <div class="pt-1 mb-4">
+                                        <button
+                                            class="btn btn-dark btn-lg btn-block"
+                                            type="submit">
+                                            Connect
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</section>
 {% endblock %}
-
 {% block scripts %}
-<script defer src="{{ url_for('static', filename='scripts/login-uvle.js')}}"></script>
+<script>
+    var el = document.getElementById("wrapper");
+    var toggleButton = document.getElementById("menu-toggle");
 
+    toggleButton.onclick = function () {
+        el.classList.toggle("toggled");
+    };
+</script>
+<script
+    defer
+    src="{{ url_for('static', filename='scripts/login-uvle.js')}}"></script>
 {% endblock %}
