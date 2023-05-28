@@ -95,6 +95,7 @@ let year = c_date.getFullYear();
     document.getElementById('app').innerHTML = calendar;   
 })()
 
+
 function renderCalendar(m, y) {
     //Month's first weekday
     let firstDay = new Date(y, m, 1).getDay();  
@@ -220,37 +221,7 @@ fetch('calendar_script/calendar_sample_data2.json')
     console.log("Error:", error);
   });
 
-//let deadlines_json = await fetch("http://localhost:29001/api/gclass/deadlines", {method:"POST", body:{"from":"2023/05/28"}}).json();
-
-async function getData(url, method, body_from, body_to) {
-  //const response = await fetch(url, {method:method, body:body});
-
-  let response;
-
-  if(body_from != "" && body_to != "") {response = fetch(url, {method: method, body:{"from": body_from, "to": body_to}})}
-
-  else if(body_from != "") {response = fetch(url, {method: method, body:{"from": body_from}})}
-
-  else if(body_to != "") {response = fetch(url, {method: method, body:{"to": body_to}})}
-
-  else {response = fetch(url, {method: method, body:{}})};
-
-  return response.json();
-}
-
-//let deadlines_json = getData("http://localhost:29001/api/gclass/deadlines", "POST", "2023/05/28", "2023/05/29");
-//let deadlines_json = await fetch("http://localhost:29001/api/gclass/deadlines", {method:"POST", body:{"from":"2023/05/28"}}).json();
-
-let data = fetch("http://localhost:29001/api/gclass/classes", {method:"GET", body:{}});
-
-//fetch("http://localhost:29001/api/gclass/deadlines", {method: "POST", //body: deadlines}).then(
-//    function(u) {return u.json();}
-//    ).then(
-//        function(json){
-//            deadlines_json = json;
-//        }
-//    );
-
+let deadlines_data = fetch("http://localhost:29001/api/uvle/deadlines", {method:"POST", body:{"from":"2023/05/28"}});
 
 //let data = {
 //  "professor": "Solamo",
