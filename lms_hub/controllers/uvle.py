@@ -5,7 +5,8 @@ from lms_hub.models.deadline import Deadline
 from lms_hub.models.credentials import UVLeCredentials
 from lms_hub.models.learning_env_class import LearningEnvClass, Platform
 
-class UVLeClient(LearningEnv):
+@LearningEnv.register
+class UVLeClient:
     def __init__(self, creds: UVLeCredentials):
         self.credentials = creds
         self._user_id = None
@@ -14,11 +15,11 @@ class UVLeClient(LearningEnv):
     def user_id(self) -> str:
         if self._user_id is None:
             # Cache user ID from server response
-            response = self.moodle_request("core_webservice_get_site_info")
+            response = self.uvle_request("core_webservice_get_site_info")
             self._user_id = response.json()["userid"]
         return self._user_id
 
-    def moodle_request(
+    def uvle_request(
         self,
         func: str,
         id_required: bool = False,
@@ -46,7 +47,7 @@ class UVLeClient(LearningEnv):
         )
 
     def _get_category_name(self, category_id: int) -> str | None:
-        response = self.moodle_request(
+        response = self.uvle_request(
             "core_course_get_categories",
             params={"criteria[0][key]": "id", "criteria[0][value]": category_id},
         )
@@ -62,7 +63,7 @@ class UVLeClient(LearningEnv):
         classes = []
 
         # Construct MoodleClass instances from server response
-        response = self._perform_request(
+        response = self.uvle_request(
             "core_enrol_get_users_courses", id_required=True
         )
         courses = response.json()
@@ -93,14 +94,14 @@ class UVLeClient(LearningEnv):
         limitnum = 20
         while True:
             # Request next 20 deadlines
-            r = self.moodle_request(
+            r = self.uvle_request(
                 'core_calendar_get_action_events_by_timesort',
                 id_required=True,
                 params={
                     'timesortfrom' : timesortfrom,
                     'aftereventid' : aftereventid,
                     'limitnum' : limitnum
-            })
+            }).json()
             new_deadlines = r['events']
             raw_deadlines.extend(new_deadlines)
 

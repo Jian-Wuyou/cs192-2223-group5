@@ -5,6 +5,6 @@ calendar = Blueprint("calendar", __name__)
 
 
 @calendar.route("/calendar")
-# @login_required
+@login_required
 def calendar_page():
     return render_template("lms/calendar.html", active_nav="calendar")

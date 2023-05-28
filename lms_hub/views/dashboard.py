@@ -5,7 +5,7 @@ dashboard = Blueprint("dashboard", __name__)
 
 
 @dashboard.route("/dashboard")
-# @login_required
+@login_required
 def dashboard_page():
     return render_template("lms/dashboard.html", active_nav="dashboard")
     # uvle_islinked = "uvle" in current_user.accounts and current_user.accounts["uvle"].token != ""

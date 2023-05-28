@@ -9,6 +9,7 @@ from flask_login import LoginManager, current_user
 from lms_hub.controllers.database import Database
 from lms_hub.models.profile import Profile
 from lms_hub.views import init_views
+from lms_hub.controllers import init_api
 
 # Environment variables
 load_dotenv()
@@ -54,6 +55,7 @@ def add_cors(resp: Response):
     return resp
 
 init_views(app)
+init_api(app)
 
 @app.route("/", methods=["GET"])
 def index():

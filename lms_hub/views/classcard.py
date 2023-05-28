@@ -5,6 +5,6 @@ classcard = Blueprint("classcard", __name__)
 
 
 @classcard.route("/classcard")
-# @login_required
+@login_required
 def classcard_page():
     return render_template("lms/classcard.html", active_nav="classcard")

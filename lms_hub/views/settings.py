@@ -5,6 +5,6 @@ settings = Blueprint("settings", __name__)
 
 
 @settings.route("/settings")
-# @login_required
+@login_required
 def settings_page():
     return render_template("lms/settings.html", active_nav="settings")
