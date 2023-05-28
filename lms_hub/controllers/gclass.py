@@ -1,0 +1,130 @@
+from datetime import datetime
+from typing import Callable
+from dataclasses import asdict
+
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+from lms_hub.controllers.learning_env import LearningEnv
+from lms_hub.models.credentials import GoogleCredentials
+from lms_hub.models.deadline import Deadline
+from lms_hub.models.learning_env_class import LearningEnvClass
+
+
+@LearningEnv.register
+class GoogleClassroomClient:
+    def __init__(
+        self,
+        credentials: GoogleCredentials,
+        client_secret: str,
+        on_token_refresh: Callable[[GoogleCredentials], None],
+    ):
+        # Create Google Credentials object from the given credentials
+        credentials = asdict(credentials)
+        credentials["client_secret"] = client_secret
+        creds = Credentials.from_authorized_user_info(credentials)
+
+        # Check if credentials are valid
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+
+                # Update credentials
+                on_token_refresh(
+                    GoogleCredentials(
+                        email=credentials["email"],
+                        token=creds.token,
+                        refresh_token=creds.refresh_token,
+                        token_uri=creds.token_uri,
+                        client_id=creds.client_id,
+                        scopes=creds.scopes,
+                        id_token=creds.id_token,
+                        expiry=f"{creds.expiry.isoformat()}Z",
+                        user_id=credentials["user_id"],
+                    )
+                )
+            else:
+                raise Exception("Invalid credentials")
+
+        # Create Google Classroom API service
+        self.service = build("classroom", "v1", credentials=creds)
+
+    def get_classes(self) -> list[LearningEnvClass]:
+        results = self.service.courses().list(pageSize=10).execute()
+        courses = results.get("courses", [])
+        classes = []
+
+        for course in courses:
+            classes.append(
+                LearningEnvClass(
+                    class_id=int(course["id"]),
+                    name=course["name"],
+                    description=course["descriptionHeading"],
+                    url=course["alternateLink"],
+                    platform="gclass"
+                )
+            )
+
+        return classes
+
+    def get_deadlines(self) -> list[Deadline]:
+        my_classes = self.get_classes()
+        deadlines_list = []
+
+        for my_class in my_classes:
+            class_id = str(my_class.class_id)
+            coursework_result = (
+                self.service.courses().courseWork().list(courseId=class_id).execute()
+            )
+            coursework_list = coursework_result.get("courseWork", [])
+            for coursework in coursework_list:
+                # Check if coursework has a due date
+                due_timestamp = 0
+                # If dueDate exists then dueTime does as well
+                if "dueDate" in coursework:
+                    dueDate = coursework["dueDate"]
+                    dueTime = coursework["dueTime"]
+
+                    due_str = (
+                        f'{dueDate["year"]}-{dueDate["month"]:02d}-{dueDate["day"]:02d} '
+                        f'{dueTime.get("hours", 0):02d}:{dueTime.get("minutes", 0):02d}'
+                    )
+                    due_obj = datetime.strptime(due_str, "%Y-%m-%d %H:%M")
+
+                    # Is it past due date?
+                    if due_obj <= datetime.utcnow():
+                        # Don't include in the list
+                        continue
+
+                    # Save timestamp
+                    due_timestamp = int(due_obj.timestamp())
+
+                # Check if already submitted
+                submission_result = (
+                    self.service.courses()
+                    .courseWork()
+                    .studentSubmissions()
+                    .list(
+                        courseId=class_id,
+                        courseWorkId=coursework["id"],
+                        states=["TURNED_IN", "RETURNED"],
+                    )
+                    .execute()
+                )
+                submission_list = submission_result.get("studentSubmissions", [])
+                if len(submission_list):
+                    # Already submitted, don't include
+                    continue
+
+                deadlines_list.append(Deadline(
+                    course_name=my_class.name,
+                    course_url=my_class.url,
+                    name=coursework["title"],
+                    url=coursework["alternateLink"],
+                    timestamp=due_timestamp,
+                    description=coursework.get('description', ""),
+                    platform="gclass",
+                    moduletype=coursework["workType"]
+                ))
+
+        return deadlines_list
