@@ -45,14 +45,28 @@ function ownerGreeting(n){
     box.textContent = greeting;
 }
 
-fetch('classcard_script/courses.json')
+(() => {
+    fetch('/api/uvle/classes')
     .then(response => response.json())
     .then((json) => {
         ownerGreeting("Bill");
-        for (var i = 0; i < json.courses.length; i++){
-            console.log(json.courses[i]);
-            addCard(json.courses[i]);
+        console.log(json);
+
+        for(const course of json.courses) {
+            addCard(course);
         }
     });
+    fetch('/api/gclass/classes', {mode: 'no-cors'})
+    .then(response => response.json())
+    .then((json) => {
+        ownerGreeting("Bill");
+        console.log(json);
+
+        for(const course of json.courses) {
+            addCard(course);
+        }
+    });
+}
+)();
 
 

@@ -66,13 +66,23 @@ function ownerGreeting(){
     box.textContent = greeting;
 }
 
-fetch('dashboard_script/deadlines.json')
+fetch('/api/uvle/deadlines')
     .then(response => response.json())
     .then((json) => {
         ownerGreeting();
         numberOfAssignments(json.deadlines.length);
         for (var i = 0; i < json.deadlines.length; i++){
             console.log(json.deadlines[i]);
+            addCard(json.deadlines[i]);
+        }
+    });
+    fetch('/api/gclass/deadlines')
+    .then(response => response.json())
+    .then((json) => {
+        ownerGreeting();
+        console.log(json.deadlines);
+        numberOfAssignments(json.deadlines.length);
+        for (var i = 0; i < json.deadlines.length; i++){
             addCard(json.deadlines[i]);
         }
     });
