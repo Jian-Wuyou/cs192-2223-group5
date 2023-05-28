@@ -9,6 +9,12 @@ let day = c_date.getDay();
 let month = c_date.getMonth();
 let year = c_date.getFullYear();
 
+//{{ current_user['name'] }};
+//let x = () =>{{ deadlines[1] }};
+//let x = fetch(deadlines)
+
+//let x = fetch("http://localhost:29001/link/gclass", {method: 'POST', })
+
 (function App() {
 
     const calendar = `<div class="container">
@@ -65,13 +71,8 @@ let year = c_date.getFullYear();
                                 <div class="input-group-append">
                                     <button class="btn btn-dark" type="button" id="createEvent">+</button>
                                 </div>
-                            </div>                        
-                        </div>
-                    </div>                            
-                </div>
-            </div>
-        </div>
-        <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+                            </div>   
+                            <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 100px;">
             <div class="toast" style="position: absolute; top: 0; right: 15px;" data-delay="3000">
                 <div class="toast-header">
                 <strong class="mr-auto">Calendar</strong>
@@ -84,7 +85,13 @@ let year = c_date.getFullYear();
                     
                 </div>
             </div>
-        </div>`;
+        </div>                     
+                        </div>
+                    </div>                            
+                </div>
+            </div>
+        </div>
+        `;
     document.getElementById('app').innerHTML = calendar;   
 })()
 
@@ -212,6 +219,37 @@ fetch('calendar_script/calendar_sample_data2.json')
     // Handle any errors that occurred during the fetch
     console.log("Error:", error);
   });
+
+//let deadlines_json = await fetch("http://localhost:29001/api/gclass/deadlines", {method:"POST", body:{"from":"2023/05/28"}}).json();
+
+async function getData(url, method, body_from, body_to) {
+  //const response = await fetch(url, {method:method, body:body});
+
+  let response;
+
+  if(body_from != "" && body_to != "") {response = fetch(url, {method: method, body:{"from": body_from, "to": body_to}})}
+
+  else if(body_from != "") {response = fetch(url, {method: method, body:{"from": body_from}})}
+
+  else if(body_to != "") {response = fetch(url, {method: method, body:{"to": body_to}})}
+
+  else {response = fetch(url, {method: method, body:{}})};
+
+  return response.json();
+}
+
+//let deadlines_json = getData("http://localhost:29001/api/gclass/deadlines", "POST", "2023/05/28", "2023/05/29");
+//let deadlines_json = await fetch("http://localhost:29001/api/gclass/deadlines", {method:"POST", body:{"from":"2023/05/28"}}).json();
+
+let data = fetch("http://localhost:29001/api/gclass/classes", {method:"GET", body:{}});
+
+//fetch("http://localhost:29001/api/gclass/deadlines", {method: "POST", //body: deadlines}).then(
+//    function(u) {return u.json();}
+//    ).then(
+//        function(json){
+//            deadlines_json = json;
+//        }
+//    );
 
 
 //let data = {
