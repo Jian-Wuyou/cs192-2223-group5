@@ -3,9 +3,19 @@
 {% block head %}{% endblock %}
 {% block page_heading %}Dashboard{% endblock %}
 {% block content %}
-<p
-id="assignmentNumber"
-class="fs-2 m-2 text-danger text-center"></p>
+
+
+
+<div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
+
+<div class="d-flex align-items-center">
+    <h2 id = "owner" class="fs-2 m-2"></h2>
+    <h2 class="fs-2 m-2">{{current_user['name']}} !</h2>
+</div>
+
+<p id="assignmentNumber" class="fs-2 m-2 text-danger text-center"></p>
 
 <section id="UpcomingEvents">
 <h2 class="text-center my-5">Upcoming events</h2>
@@ -18,6 +28,11 @@ class="fs-2 m-2 text-danger text-center"></p>
 {% endblock %}
 {% block scripts %}
 <script>
+    $(window).on("load",function(){
+      $(".loader-wrapper").fadeOut("slow");
+    });
+</script>
+<script>
     var el = document.getElementById("wrapper");
     var toggleButton = document.getElementById("menu-toggle");
 
@@ -26,4 +41,5 @@ class="fs-2 m-2 text-danger text-center"></p>
     };
 </script>
 <script src="{{ url_for('static', filename='scripts/dashboard.js') }}"></script>
+
 {% endblock %}
