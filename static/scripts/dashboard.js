@@ -83,7 +83,7 @@ function ownerGreeting(){
     box.textContent = greeting;
 }
 
-fetch('/api/uvle/deadlines')
+fetch('/api/uvle/deadlines', {method: "POST", body: {"description": false}})
     .then(response => response.json())
     .then((json) => {
         ownerGreeting();
@@ -93,7 +93,7 @@ fetch('/api/uvle/deadlines')
             addCard(deadline);
         }
     });
-    fetch('/api/gclass/deadlines')
+    fetch('/api/gclass/deadlines', {method: "POST", body: {"description": false}})
     .then(response => response.json())
     .then((json) => {
         ownerGreeting();
