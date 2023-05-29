@@ -18,17 +18,7 @@ class Deadline:
     platform: Platform          # Platform that the course is on
     moduletype: str = None
 
-
-class DeadlineEnc(JSONEncoder):
-    """
-    JSONEncoder for Deadline objects.
-    """
-    def default(self, o):
-        if isinstance(o, Deadline):
-            return asdict(o)
-        return JSONEncoder.default(self, o)
-
-def sort_deadlines(raw_deadlines: list[Deadline]) -> dict[str, any]:
+def sort_deadlines(raw_deadlines: list[Deadline]) -> list[dict[str, any]]:
     # Sort deadlines by date
     deadlines = []
     for deadline in raw_deadlines:
