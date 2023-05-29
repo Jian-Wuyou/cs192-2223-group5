@@ -175,7 +175,6 @@ function renderCalendar(m, y) {
     }
 }
 
-
 //let data = {
 //  "professor": "Solamo",
 //  "date": "1442023",
@@ -184,51 +183,29 @@ function renderCalendar(m, y) {
 //  "remarks": "To be submitted on Monday"
 //}
 
-(() => {
+(async () => {
     App();
     renderCalendar(month, year);
     let hard_coded_obj = [];
 
-    fetch("/api/uvle/deadlines")
-        .then((response) => response.json())
-        .then((data) => {});
-    fetch("calendar_script/calendar_sample_data1.json")
-        .then((response) => response.json())
-        .then((data) => {
-            var eventText = `Professor${data.professor} (${data.course}): ${data.assignment_title} [${data.remarks}]`;
-
-            hard_coded_obj.push({
-                id: 1,
-                eventDate: data.date, //Day+(Month 0 indexed)+Year
-                eventText: eventText, //"Professor Solamo (CS 192): Sprint Plan",
-            });
-
+    // Initiate requests
+    ["/api/uvle/deadlines", "/api/gclass/deadlines"].map((url) =>
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify({ description: false }),
+        }).then(r => r.json())
+        .then(data => {
+            console.log(data.deadlines);
+            for (const deadline of data.deadlines) {
+                hard_coded_obj.push({
+                    id: 1,
+                    eventDate: deadline.date,
+                    eventText: `${deadline.course_name}: ${deadline.name}`,
+                });
+            }
             localStorage.setItem("events", JSON.stringify(hard_coded_obj));
         })
-        .catch((error) => {
-            // Handle any errors that occurred during the fetch
-            console.log("Error:", error);
-        });
-
-    hard_coded_obj = [];
-
-    fetch("calendar_script/calendar_sample_data2.json")
-        .then((response) => response.json())
-        .then((data) => {
-            var eventText = `Professor${data.professor} (${data.course}): ${data.assignment_title} [${data.remarks}]`;
-
-            hard_coded_obj.push({
-                id: 1,
-                eventDate: data.date, //Day+(Month 0 indexed)+Year
-                eventText: eventText, //"Professor Solamo (CS 192): Sprint Plan",
-            });
-
-            localStorage.setItem("events", JSON.stringify(hard_coded_obj));
-        })
-        .catch((error) => {
-            // Handle any errors that occurred during the fetch
-            console.log("Error:", error);
-        });
+    );
 
     $(function () {
         function showEvent(eventDate) {
@@ -295,8 +272,11 @@ function renderCalendar(m, y) {
             $(this).addClass("active");
             let todaysDate = $(this).text() + " " + months[month] + " " + year;
             let eventDay = days[new Date(year, month, $(this).text()).getDay()];
-            let eventDate = $(this).text() + month + year;
-            //window.alert(eventDate);
+
+            // Uses YYYY-MM-DD
+            let eventDate = `${year}-${("00" + (month + 1)).slice(-2)}-${(
+                "00" + $(this).text()
+            ).slice(-2)}`;
             $(".event-date").html(todaysDate).data("eventdate", eventDate);
             $(".event-day").html(eventDay);
             showEvent(eventDate);
