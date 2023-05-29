@@ -1,7 +1,6 @@
 function addCard(assignment){
     const box = document.getElementById('deadlines');
 
-
     const newcard = document.createElement('div');
     newcard.className = 'classcard text-white bg-dark m-2 h-100 rounded';
     newcard.style = 'max-width:300px';
@@ -24,7 +23,7 @@ function addCard(assignment){
 
     const newassignmentLink = document.createElement('a');
     newassignmentLink.className = "btn btn-primary";
-    newassignmentLink.href = assignment.course_url;
+    newassignmentLink.href = assignment.url;
     newassignmentLink.target = "_blank"
     newassignmentLink.textContent = "Go to class";
 
@@ -38,18 +37,19 @@ function addCard(assignment){
     newcardfooter.appendChild(newassignmentLink);
 }
 
-function ownerGreeting(n){
+function ownerGreeting(){
     const box = document.getElementById('owner');
     var greetingsArray = ["Here are your classes,"];
     var greeting = greetingsArray[Math.floor(Math.random()*greetingsArray.length)];
     box.textContent = greeting;
 }
 
+
 (() => {
     fetch('/api/uvle/classes')
     .then(response => response.json())
     .then((json) => {
-        ownerGreeting("Bill");
+        ownerGreeting();
         console.log(json);
 
         for(const course of json.courses) {
@@ -59,7 +59,7 @@ function ownerGreeting(n){
     fetch('/api/gclass/classes', {mode: 'no-cors'})
     .then(response => response.json())
     .then((json) => {
-        ownerGreeting("Bill");
+        ownerGreeting();
         console.log(json);
 
         for(const course of json.courses) {
