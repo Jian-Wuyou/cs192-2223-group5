@@ -4,13 +4,22 @@
 {% block page_heading %}Settings{% endblock %}
 {% block content %}
 <div class="container-fluid px-4">
-    <div class="row g-3 my-2">
-        <div class="col-md-3">
+    <div class="row g-3 my-1">
+        <div class="col">
             <div class="p-1 d-flex align-items-center">
-                <p class="fs-2 m-2 text-light">Link Account</p>
+                <p class="fs-2 m-2 text-light">Link UVLê</p>
                 <button
                     class="btn btn-link"
-                    onClick="location.href='login2uvle.html'">
+                    onClick="location.href='link/uvle'">
+                    <i
+                        class="fas m-2 fa-external-link-alt fs-4 primary-text"></i>
+                </button>
+            </div>
+            <div class="p-1 d-flex align-items-center">
+                <p class="fs-2 m-2 text-light">Link Google Classroom</p>
+                <button
+                    class="btn btn-link"
+                    onClick="location.href='link/gclass'">
                     <i
                         class="fas m-2 fa-external-link-alt fs-4 primary-text"></i>
                 </button>
@@ -24,15 +33,26 @@
     <div class="row g-3 my-2">
         <h2 class="fs-3">Linked accounts</h2>
         <div class="col-md-3 d-grid gap-4">
-            <div class="p-1 d-flex align-items-center">
-                <div class="rounded-circle gmail-image m-0">&nbsp;</div>     
-                <p class="fs-3 m-2 text-light">
-                    {{ current_user['email'] }}
-                </p>
-                <a class = "m-2" href="{{ url_for('link-uvle.logout_post') }}"
-                    >Unlink</a>
-            </div>
-            <hr/>
+            {% if 'uvle' in current_user['accounts'] %}
+                <div class="p-1 d-flex align-items-center">
+                    <div class="rounded-circle uvle-image m-0">&nbsp;</div>     
+                    <p class="fs-3 m-2 text-light">
+                        {{ current_user['accounts']['uvle']['username']}}
+                    </p>
+                    <a class = "m-2" href="{{ url_for('link-uvle.logout_post') }}"
+                        >Unlink</a>
+                </div>
+            {% endif %}  
+            {% if 'gclass' in current_user['accounts'] %}
+                <div class="p-1 d-flex align-items-center">
+                        <div class="rounded-circle googleclassroom-image m-0">&nbsp;</div>     
+                        <p class="fs-3 m-2 text-light">
+                            {{ current_user['accounts']['gclass']['email']}}
+                        </p>
+                        <a class = "m-2" href="{{ url_for('link-gclass.logout_post') }}"
+                            >Unlink</a>
+                </div>  
+            {% endif %}                   
         </div>
     </div>
 </div>
