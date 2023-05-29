@@ -42,8 +42,8 @@ function addCard(assignment){
     newcardfooter.appendChild(newassignmentLink);
 }
 
-function numberOfAssignments(n){
-    const box = document.getElementById('assignmentNumber');
+function numberOfAssignmentsUvle(n){
+    const box = document.getElementById('assignmentNumberUvle');
     const text1 = document.createElement('span');
     text1.style = "color:#fff";
     text1.textContent = "You Have ";
@@ -55,7 +55,24 @@ function numberOfAssignments(n){
     box.appendChild(text2)
     const text3 = document.createElement('span');
     text3.style = "color:#fff";
-    text3.textContent = " Assigments Due!";
+    text3.textContent = " Assigments Due on UVLê!";
+    box.appendChild(text3)
+}
+
+function numberOfAssignmentsGclass(n){
+    const box = document.getElementById('assignmentNumberGclass');
+    const text1 = document.createElement('span');
+    text1.style = "color:#fff";
+    text1.textContent = "You Have ";
+    box.appendChild(text1)
+    const text2 = document.createElement('span');
+    text2.style = "color:#ff0000";
+    text2.className = "redtext";
+    text2.textContent = n;
+    box.appendChild(text2)
+    const text3 = document.createElement('span');
+    text3.style = "color:#fff";
+    text3.textContent = " Assigments Due on Google Classroom!";
     box.appendChild(text3)
 }
 
@@ -70,7 +87,7 @@ fetch('/api/uvle/deadlines')
     .then(response => response.json())
     .then((json) => {
         ownerGreeting();
-        numberOfAssignments(json.deadlines.length);
+        numberOfAssignmentsUvle(json.deadlines.length);
         for (var i = 0; i < json.deadlines.length; i++){
             console.log(json.deadlines[i]);
             addCard(json.deadlines[i]);
@@ -81,7 +98,7 @@ fetch('/api/uvle/deadlines')
     .then((json) => {
         ownerGreeting();
         console.log(json.deadlines);
-        numberOfAssignments(json.deadlines.length);
+        numberOfAssignmentsGclass(json.deadlines.length);
         for (var i = 0; i < json.deadlines.length; i++){
             addCard(json.deadlines[i]);
         }
