@@ -28,12 +28,14 @@ def create_uvle_client(creds: UVLeCredentials) -> UVLeClient:
 
 
 @uvle.route("/classes")
+@login_required
 def uvle_get_classes():
     client = create_uvle_client(current_user.accounts['uvle'])
     return dumps({"courses": client.get_classes()}, cls=LearningEnvClassEnc)
 
 
 @uvle.route("/deadlines")
+@login_required
 def uvle_get_deadlines():
     # Get deadlines from Moodle
     client = create_uvle_client(current_user.accounts['uvle'])

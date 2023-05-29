@@ -30,6 +30,7 @@ def on_token_refresh(google_credentials: GoogleCredentials):
 
 
 @gclass.route("/classes")
+@login_required
 def gclass_get_classes():
     # Perform request for all linked accounts
     all_classes = {}
@@ -50,6 +51,7 @@ def gclass_get_classes():
 
 
 @gclass.route("/deadlines")
+@login_required
 def gclass_get_deadlines():
     # Perform request for all linked accounts
     raw_deadlines = []
