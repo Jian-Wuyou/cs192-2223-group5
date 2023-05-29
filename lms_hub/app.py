@@ -33,11 +33,13 @@ with open(environ["GOOGLE_CREDENTIALS_FILE"], encoding="utf-8") as file:
     app.config["GOOGLE_CLIENT_ID"] = data["web"]["client_id"]
     app.config["GOOGLE_CLIENT_SECRET"] = data["web"]["client_secret"]
 
+init_views(app)
+init_api(app)
+
 # User loader
 @login_manager.user_loader
 def user_loader(user_id: str) -> Profile:
     return app.config["DB"].lookup_user_by_id(user_id)
-
 
 # Unauthorized error handler
 @login_manager.unauthorized_handler
@@ -54,18 +56,12 @@ def add_cors(resp: Response):
     })
     return resp
 
-init_views(app)
-init_api(app)
-
 @app.route("/", methods=["GET"])
 def index():
     # Redirect to dashboard if already logged in
     if current_user.is_authenticated:
         return redirect(url_for("dashboard.dashboard_page"))
     return redirect(url_for("login.login_page"))
-
-from .temp import temp
-app.register_blueprint(temp)
 
 # Run app
 if __name__ == "__main__":
