@@ -20,7 +20,7 @@ function addCard(assignment){
 
     const newassignmentDesc = document.createElement('p');
     newassignmentDesc.className = "classcard-text scroll";
-    newassignmentDesc.textContent = assignment.description;
+    // newassignmentDesc.textContent = assignment.description;
 
     const newcardfooter = document.createElement('div');
     newcardfooter.className = 'classcard-footer text-center bg-light';
@@ -28,7 +28,7 @@ function addCard(assignment){
 
     const newassignmentLink = document.createElement('a');
     newassignmentLink.className = "btn btn-primary";
-    newassignmentLink.href = assignment.course_url;
+    newassignmentLink.href = assignment.url;
     newassignmentLink.target = "_blank"
     newassignmentLink.textContent = "Go to page";
 
@@ -87,10 +87,10 @@ fetch('/api/uvle/deadlines')
     .then(response => response.json())
     .then((json) => {
         ownerGreeting();
+        console.log(json.deadlines);
         numberOfAssignmentsUvle(json.deadlines.length);
-        for (var i = 0; i < json.deadlines.length; i++){
-            console.log(json.deadlines[i]);
-            addCard(json.deadlines[i]);
+        for (const deadline of json.deadlines){
+            addCard(deadline);
         }
     });
     fetch('/api/gclass/deadlines')
@@ -99,8 +99,8 @@ fetch('/api/uvle/deadlines')
         ownerGreeting();
         console.log(json.deadlines);
         numberOfAssignmentsGclass(json.deadlines.length);
-        for (var i = 0; i < json.deadlines.length; i++){
-            addCard(json.deadlines[i]);
+        for (const deadline of json.deadlines){
+            addCard(deadline);
         }
     });
 
