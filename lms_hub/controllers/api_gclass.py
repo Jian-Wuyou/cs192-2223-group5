@@ -1,6 +1,6 @@
 from json import dumps
 
-from flask import Blueprint, current_app, redirect, url_for
+from flask import Blueprint, current_app, redirect, url_for, request
 from flask_login import current_user, login_required
 from lms_hub.controllers.gclass import GoogleClassroomClient
 from lms_hub.models.credentials import GoogleCredentials
@@ -50,11 +50,15 @@ def gclass_get_classes():
     return dumps({"courses": all_classes}, cls=LearningEnvClassEnc)
 
 
-@gclass.route("/deadlines")
+@gclass.route("/deadlines", methods=["POST"])
 @login_required
 def gclass_get_deadlines():
-    # Perform request for all linked accounts
-    raw_deadlines = []
+    r = request.json
+    payload =  {
+        "from": r.get("from", None),
+        "to": r.get("to", None),
+        "description": r.get("description", True)
+    }
 
     google_credentials = current_user.accounts['gclass']
 
@@ -64,8 +68,11 @@ def gclass_get_deadlines():
         current_app.config["GOOGLE_CLIENT_SECRET"],
         on_token_refresh,
     )
-    raw_deadlines.extend(client.get_deadlines())
+    deadlines = sort_deadlines(client.get_deadlines())
 
+    if not payload["description"]:
+        for deadline in deadlines:
+            deadline.pop("description")
     # The coursework is returned as a list of GoogleCoursework dataclass instances,
     # so we need to serialize them to JSON.
-    return dumps({"deadlines": sort_deadlines(raw_deadlines)})
+    return dumps({"deadlines": deadlines})

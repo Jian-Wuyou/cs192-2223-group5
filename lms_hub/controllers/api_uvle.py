@@ -1,7 +1,7 @@
 from json import dumps
 from typing import List
 
-from flask import Blueprint, current_app, redirect, url_for
+from flask import Blueprint, current_app, redirect, url_for, request
 from flask_login import current_user, login_required
 from lms_hub.controllers.uvle import UVLeClient
 from lms_hub.models.credentials import UVLeCredentials
@@ -34,10 +34,22 @@ def uvle_get_classes():
     return dumps({"courses": client.get_classes()}, cls=LearningEnvClassEnc)
 
 
-@uvle.route("/deadlines")
+@uvle.route("/deadlines", methods=["POST"])
 @login_required
 def uvle_get_deadlines():
-    # Get deadlines from Moodle
+    # Get JSON body parameters
+    r = request.json
+    payload =  {
+        "from": r.get("from", None),
+        "to": r.get("to", None),
+        "description": r.get("description", True)
+    }
+
     client = create_uvle_client(current_user.accounts['uvle'])
-    raw_deadlines: list[Deadline] = client.get_deadlines()
-    return dumps({"deadlines": sort_deadlines(raw_deadlines)})
+    deadlines = sort_deadlines(client.get_deadlines())
+
+    if not payload["description"]:
+        for deadline in deadlines:
+            deadline.pop("description")
+
+    return dumps({"deadlines": deadlines})
