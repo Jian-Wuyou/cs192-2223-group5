@@ -187,25 +187,40 @@ function renderCalendar(m, y) {
     App();
     renderCalendar(month, year);
     let hard_coded_obj = [];
+    let deadline_data = {}
 
     // Initiate requests
-    ["/api/uvle/deadlines", "/api/gclass/deadlines"].map((url) =>
+    Promise.allSettled(["/api/uvle/deadlines", "/api/gclass/deadlines"].map((url) =>
         fetch(url, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({ description: false }),
         }).then(r => r.json())
         .then(data => {
             console.log(data.deadlines);
             for (const deadline of data.deadlines) {
-                hard_coded_obj.push({
+                if(deadline_data[deadline.date] === undefined) {
+                    deadline_data[deadline.date] = [];
+                }
+                deadline_data[deadline.date].push({
                     id: 1,
-                    eventDate: deadline.date,
                     eventText: `${deadline.course_name}: ${deadline.name}`,
-                });
+                })
+                // hard_coded_obj.push({
+                //     id: 1,
+                //     eventDate: deadline.date,
+                //     eventText: `${deadline.course_name}: ${deadline.name}`,
+                // });
             }
-            localStorage.setItem("events", JSON.stringify(hard_coded_obj));
+            // localStorage.setItem("events", JSON.stringify(hard_coded_obj));
+            localStorage.setItem("events", JSON.stringify(deadline_data));
         })
-    );
+    )).then(results => {
+        // Done fetching both google and uvle, highlight now
+        console.log(JSON.parse(localStorage.getItem("events")));
+    });
 
     $(function () {
         function showEvent(eventDate) {
@@ -216,13 +231,11 @@ function renderCalendar(m, y) {
                     '<h5 class="text-center">No events found</h5 class="text-center">'
                 );
             } else {
-                let eventsToday = storedEvents.filter(
-                    (eventsToday) => eventsToday.eventDate === eventDate
-                );
-                let eventsList = Object.keys(eventsToday).map(
-                    (k) => eventsToday[k]
-                );
-                if (eventsList.length > 0) {
+                // let eventsToday = storedEvents.filter(
+                //     (eventsToday) => eventsToday.eventDate === eventDate
+                // );
+                let eventsList = storedEvents[eventDate];
+                if (eventsList?.length > 0) {
                     let eventsLi = "";
                     eventsList.forEach((event) =>
                         $(".events-today").html(
@@ -286,7 +299,7 @@ function renderCalendar(m, y) {
         });
         $(document).on("click", "#createEvent", function () {
             let events = localStorage.getItem("events");
-            let obj = [];
+            let obj = {};
             if (events) {
                 obj = JSON.parse(events);
             }
@@ -312,7 +325,7 @@ function renderCalendar(m, y) {
             }
             if (valid) {
                 let id = 1;
-                if (obj.length > 0) {
+                if (Object.keys(obj).length > 0) {
                     id =
                         Math.max.apply(
                             "",
@@ -323,12 +336,13 @@ function renderCalendar(m, y) {
                 } else {
                     id = 1;
                 }
-                obj.push({
+                
+                if(obj[eventDate] === undefined) {
+                    obj[eventDate] = [];
+                }
+                obj[eventDate].push({
                     id: id,
-                    eventDate: eventDate,
                     eventText: eventText,
-                    //"professor": "not sample prof",
-                    //"course": "not sample course"
                 });
                 localStorage.setItem("events", JSON.stringify(obj));
                 $("#eventTxt").val("");
