@@ -25,8 +25,8 @@ scopes = [
 @login_required
 def login_page():
     # Create flow instance to manage the OAuth 2.0 Authorization Grant Flow steps.
-    flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
-        environ["GOOGLE_CREDENTIALS_FILE"], scopes=scopes)
+    flow = google_auth_oauthlib.flow.Flow.from_client_config(
+        current_app.config["GOOGLE_CREDENTIALS"], scopes=scopes)
 
     # The URI created here must exactly match one of the authorized redirect URIs
     # for the OAuth 2.0 client, which you configured in the API Console. If this
@@ -53,8 +53,8 @@ def login_callback():
     # verified in the authorization server response.
     state = session['state']
 
-    flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
-        environ["GOOGLE_CREDENTIALS_FILE"], scopes=scopes, state=state)
+    flow = google_auth_oauthlib.flow.Flow.from_client_config(
+        current_app.config["GOOGLE_CREDENTIALS"], scopes=scopes, state=state)
     flow.redirect_uri = url_for('link-gclass.login_callback', _external=True)
 
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
