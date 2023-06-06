@@ -44,7 +44,8 @@ GOOGLE_CREDENTIALS = {
 # Flask app
 root_path = path.abspath(path.join(path.dirname(__file__), ".."))
 app = Flask(__name__, root_path=root_path)
-
+app.config.from_prefixed_env()
+print(app.config["PREFERRED_URL_SCHEME"])
 
 app.secret_key = environ["FLASK_SECRET_KEY"]
 login_manager = LoginManager()
