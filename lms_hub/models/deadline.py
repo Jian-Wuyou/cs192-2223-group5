@@ -1,6 +1,6 @@
 from datetime import datetime
 from dataclasses import asdict, dataclass
-from typing import List
+from typing import List, Dict
 
 @dataclass
 class Deadline:
@@ -16,7 +16,7 @@ class Deadline:
     platform: str               # Platform that the course is on
     moduletype: str = None
 
-def sort_deadlines(raw_deadlines: List[Deadline]) -> List[dict[str, any]]:
+def sort_deadlines(raw_deadlines: List[Deadline]) -> List[Dict[str, any]]:
     # Sort deadlines by date
     deadlines = []
     for deadline in raw_deadlines:
