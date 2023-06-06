@@ -8,7 +8,7 @@ class Profile:
     google_user_id: str
     name: str
     email: str
-    accounts:Dict[str, LearningEnvCredentials]
+    accounts: Dict[str, LearningEnvCredentials]
     user_id: str = ""
 
     def __post_init__(self):
@@ -19,7 +19,7 @@ class Profile:
     def get_id(self) -> str:
         return self.user_id
 
-def from_google_jwt(jwt_info:Dict[str, str | int | bool]) -> Profile:
+def from_google_jwt(jwt_info: Dict[str, str | int | bool]) -> Profile:
     return Profile(
         google_user_id=jwt_info["sub"],
         name=jwt_info["name"],

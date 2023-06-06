@@ -1,8 +1,6 @@
 from datetime import datetime
 from dataclasses import asdict, dataclass
-from json import JSONEncoder
-
-from .learning_env_class import Platform
+from typing import List
 
 @dataclass
 class Deadline:
