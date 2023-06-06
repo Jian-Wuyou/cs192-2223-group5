@@ -15,7 +15,7 @@ class Deadline:
     url: str                    # URL to the assignment, if any
     timestamp: int              # Deadline date, in Unix timestamp format
     description: str
-    platform: Platform          # Platform that the course is on
+    platform: str               # Platform that the course is on
     moduletype: str = None
 
 def sort_deadlines(raw_deadlines: list[Deadline]) -> list[dict[str, any]]:

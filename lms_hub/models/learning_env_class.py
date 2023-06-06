@@ -1,11 +1,10 @@
 from dataclasses import dataclass, asdict
 from json import JSONEncoder
-from enum import StrEnum, auto
 
 # Supported Learning Management Systems
-class Platform(StrEnum):
-    UVLE = auto()
-    GCLASS = auto()
+class Platform:
+    UVLE = 'uvle'
+    GCLASS = 'auto'
 
 @dataclass
 class LearningEnvClass:
@@ -14,7 +13,7 @@ class LearningEnvClass:
     """
 
     class_id: str       # Class ID
-    platform: Platform
+    platform: str
     name: str           # Class name
     description: str    # Class description
     url: str            # Class URL (link to external learning environment)
