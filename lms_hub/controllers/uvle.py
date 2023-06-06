@@ -1,5 +1,5 @@
 import requests
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from lms_hub.controllers.learning_env import LearningEnv
 from lms_hub.models.deadline import Deadline
@@ -24,7 +24,7 @@ class UVLeClient:
         self,
         func: str,
         id_required: bool = False,
-        params:Dict[str, any] | None = None
+        params:Optional[Dict[str, any]] = None
     ) -> requests.Response:
         if params is None:
             params = {}
@@ -47,7 +47,7 @@ class UVLeClient:
             params=request_params,
         )
 
-    def _get_category_name(self, category_id: int) -> str | None:
+    def _get_category_name(self, category_id: int) -> Optional[str]:
         response = self.uvle_request(
             "core_course_get_categories",
             params={"criteria[0][key]": "id", "criteria[0][value]": category_id},
