@@ -1,4 +1,5 @@
 import requests
+from typing import List, Dict
 
 from lms_hub.controllers.learning_env import LearningEnv
 from lms_hub.models.deadline import Deadline
@@ -23,7 +24,7 @@ class UVLeClient:
         self,
         func: str,
         id_required: bool = False,
-        params: dict[str, any] | None = None
+        params:Dict[str, any] | None = None
     ) -> requests.Response:
         if params is None:
             params = {}
@@ -59,7 +60,7 @@ class UVLeClient:
                 return category["name"]
         return None
 
-    def get_classes(self) -> list[LearningEnvClass]:
+    def get_classes(self) -> List[LearningEnvClass]:
         classes = []
 
         # Construct MoodleClass instances from server response
@@ -84,7 +85,7 @@ class UVLeClient:
 
         return classes
 
-    def get_deadlines(self) -> list[Deadline]:
+    def get_deadlines(self) -> List[Deadline]:
         raw_deadlines = []
 
         # timesortfrom and aftereventid lets us not repeat requests for

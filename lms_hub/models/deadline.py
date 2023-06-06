@@ -18,7 +18,7 @@ class Deadline:
     platform: str               # Platform that the course is on
     moduletype: str = None
 
-def sort_deadlines(raw_deadlines: list[Deadline]) -> list[dict[str, any]]:
+def sort_deadlines(raw_deadlines: List[Deadline]) -> List[dict[str, any]]:
     # Sort deadlines by date
     deadlines = []
     for deadline in raw_deadlines:

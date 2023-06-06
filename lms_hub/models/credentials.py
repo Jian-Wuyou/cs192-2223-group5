@@ -26,7 +26,7 @@ class GoogleCredentials(LearningEnvCredentials):
     client_id: str = ""
 
     # OAuth2 scopes
-    scopes: list[str] = field(default_factory=list)
+    scopes: List[str] = field(default_factory=list)
 
     # OpenID token
     id_token: str = ""

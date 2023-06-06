@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Callable
+from typing import Callable, List
 from dataclasses import asdict
 
 from google.auth.transport.requests import Request
@@ -49,7 +49,7 @@ class GoogleClassroomClient:
         # Create Google Classroom API service
         self.service = build("classroom", "v1", credentials=creds)
 
-    def get_classes(self) -> list[LearningEnvClass]:
+    def get_classes(self) -> List[LearningEnvClass]:
         results = self.service.courses().list(pageSize=10).execute()
         courses = results.get("courses", [])
         classes = []
@@ -67,7 +67,7 @@ class GoogleClassroomClient:
 
         return classes
 
-    def get_deadlines(self) -> list[Deadline]:
+    def get_deadlines(self) -> List[Deadline]:
         my_classes = self.get_classes()
         deadlines_list = []
 
