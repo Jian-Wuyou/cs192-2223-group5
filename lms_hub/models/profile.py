@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Dict
+from typing import Dict, Union
 
 from lms_hub.models.credentials import LearningEnvCredentials
 
@@ -19,7 +19,7 @@ class Profile:
     def get_id(self) -> str:
         return self.user_id
 
-def from_google_jwt(jwt_info: Dict[str, str | int | bool]) -> Profile:
+def from_google_jwt(jwt_info: Dict[str, Union[str, int, bool]]) -> Profile:
     return Profile(
         google_user_id=jwt_info["sub"],
         name=jwt_info["name"],
